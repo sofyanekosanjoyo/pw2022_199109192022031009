@@ -27,3 +27,26 @@ function query($query)
 
   return $dataKendaraan;
 }
+
+function tambah_data($data)
+{
+  $koneksidb = koneksi();
+
+  $merk_kendaraan = htmlspecialchars($data['merk_kendaraan']);
+  $tipe_kendaraan = htmlspecialchars($data['tipe_kendaraan']);
+  $nomor_plat = htmlspecialchars($data['nomor_plat']);
+  $unit_kerja = htmlspecialchars($data['unit_kerja']);
+  $gambar = htmlspecialchars($data['gambar']);
+  $email = htmlspecialchars($data['email']);
+
+  $query = "INSERT INTO 
+            kendaraan
+            VALUES
+            (null, '$merk_kendaraan', '$tipe_kendaraan', '$nomor_plat', '$unit_kerja', '$gambar', '$email');
+            ";
+
+  mysqli_query($koneksidb, $query);
+  echo mysqli_error($koneksidb);
+
+  return mysqli_affected_rows($koneksidb);
+}

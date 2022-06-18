@@ -19,6 +19,9 @@ $kendaraan = query("SELECT * FROM kendaraan");
 <body>
   <h3>Daftar Kendaraan</h3>
 
+  <a href="tambah.php">Tambah Data Kendaraan</a>
+  <br><br>
+
   <table border="1" cellpadding="10" cellspacing="0">
     <tr>
       <th>#</th>
