@@ -1,0 +1,5 @@
+---
+deployment:
+task:
+  - export DEPLOYPATH=/home3/pw2022_199109192022031009/public_html
+  - /bin/cp -R * DEPLOYPATH
