@@ -41,7 +41,7 @@ if (isset($_POST['tombol-cari'])) {
   </form>
   <br>
 
-  <div>
+  <div class="container">
     <table border="1" cellpadding="10" cellspacing="0">
       <tr>
         <th>No</th>

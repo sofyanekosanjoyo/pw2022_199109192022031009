@@ -100,7 +100,7 @@ function cari_data($kataKunci)
   $query = "SELECT * FROM kendaraan
             WHERE 
             merk_kendaraan LIKE '%$kataKunci%' OR
-            tipe_kendaraan LIKE '%$kataKunci%' OR";
+            tipe_kendaraan LIKE '%$kataKunci%'";
   $hasilQuery = mysqli_query($koneksidb, $query);
 
   $dataKendaraan = [];
