@@ -5,6 +5,11 @@ require 'fungsi.php';
 // Tampung datanya ke variabel kendaraan
 $kendaraan = query("SELECT * FROM kendaraan");
 
+// Ketika tombol cari di klik
+if (isset($_POST['tombol-cari'])) {
+  $kendaraan = cari_data($_POST['kata_kunci']);
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -22,14 +27,26 @@ $kendaraan = query("SELECT * FROM kendaraan");
   <a href="tambah.php">Tambah Data Kendaraan</a>
   <br><br>
 
+  <form method="post" action="">
+    <input type="text" name="kata_kunci" size="40" placeholder="Masukkan kata pencarian" autocomplete="off" autofocus>
+    <button type="submit" name="tombol-cari">Cari</button>
+  </form>
+  <br>
+
   <table border="1" cellpadding="10" cellspacing="0">
     <tr>
-      <th>#</th>
+      <th>No</th>
       <th>Gambar</th>
       <th>Merk Kendaraan</th>
       <th>Tipe Kendaraan</th>
       <th>Aksi</th>
     </tr>
+
+    <?php if (empty($kendaraan)) : ?>
+      <tr>
+        <td colspan="5" style="color: red; font-style: italic">Data kendaraan tidak ditemukan</td>
+      </tr>
+    <?php endif; ?>
 
     <?php $i = 1;
     foreach ($kendaraan as $detilKendaraan) :

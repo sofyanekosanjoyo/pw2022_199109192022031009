@@ -92,3 +92,22 @@ function ubah_data($data)
 
   return mysqli_affected_rows($koneksidb);
 }
+
+function cari_data($kataKunci)
+{
+  $koneksidb = koneksi();
+
+  $query = "SELECT * FROM kendaraan
+            WHERE 
+            merk_kendaraan LIKE '%$kataKunci%' OR
+            tipe_kendaraan LIKE '%$kataKunci%' OR";
+  $hasilQuery = mysqli_query($koneksidb, $query);
+
+  $dataKendaraan = [];
+
+  while ($dataQuery = mysqli_fetch_assoc($hasilQuery)) {
+    $dataKendaraan[] = $dataQuery;
+  }
+
+  return $dataKendaraan;
+}
