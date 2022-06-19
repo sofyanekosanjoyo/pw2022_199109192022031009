@@ -38,37 +38,46 @@ if (isset($_POST['tombol-tambah'])) {
 <body>
   <h3>Form Tambah Data Kendaraan</h3>
 
-  <form method="post" action="">
+  <form method="post" action="" enctype="multipart/form-data">
     <ul>
       <li>
-        <label for="nomor_plat">Nomor Plat :</label>
-        <input type="text" name="nomor_plat" id="nomor_plat" autofocus required>
+        <label for="nomor_plat">Nomor Plat :
+          <input type="text" name="nomor_plat" id="nomor_plat" autofocus required>
+        </label>
       </li>
       <li>
-        <label for="merk_kendaraan">Merk Kendaraan :</label>
-        <input type="text" name="merk_kendaraan" id="merk_kendaraan" autofocus required>
+        <label for="merk_kendaraan">Merk Kendaraan :
+          <input type="text" name="merk_kendaraan" id="merk_kendaraan" autofocus required>
+        </label>
       </li>
       <li>
-        <label for="tipe_kendaraan">Tipe Kendaraan :</label>
-        <input type="text" name="tipe_kendaraan" id="tipe_kendaraan" autofocus required>
+        <label for="tipe_kendaraan">Tipe Kendaraan :
+          <input type="text" name="tipe_kendaraan" id="tipe_kendaraan" autofocus required>
+        </label>
       </li>
       <li>
-        <label for="unit_kerja">Unit Kerja :</label>
-        <input type="text" name="unit_kerja" id="unit_kerja" autofocus required>
+        <label for="unit_kerja">Unit Kerja :
+          <input type="text" name="unit_kerja" id="unit_kerja" autofocus required>
+        </label>
       </li>
       <li>
-        <label for="email">Email :</label>
-        <input type="text" name="email" id="email" autofocus required>
+        <label for="email">Email :
+          <input type="text" name="email" id="email" autofocus required>
+        </label>
       </li>
       <li>
-        <label for="gambar">Gambar :</label>
-        <input type="text" name="gambar" id="gambar" required>
+        <label for="gambar">Gambar :
+          <input type="file" name="gambar" id="gambar" class="gambar" onchange="previewGambar()">
+        </label>
+        <img src="gambar/nophoto.jpg" width="120" style="display: block;" class="preview-gambar">
       </li>
       <li>
         <button type="submit" name="tombol-tambah">Tambah Data</button>
       </li>
     </ul>
   </form>
+
+  <script src="js/script.js"></script>
 </body>
 
 </html>

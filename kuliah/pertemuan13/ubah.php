@@ -50,38 +50,49 @@ if (isset($_POST['tombol-ubah'])) {
 <body>
   <h3>Form Ubah Data Kendaraan</h3>
 
-  <form method="post" action="">
+  <form method="post" action="" enctype="multipart/form-data">
     <input type="hidden" name="id" id="id" value="<?= $kendaraan['id']; ?>">
     <ul>
       <li>
-        <label for="nomor_plat">Nomor Plat :</label>
-        <input type="text" name="nomor_plat" id="nomor_plat" autofocus required value="<?= $kendaraan['nomor_plat']; ?>">
+        <label for="nomor_plat">Nomor Plat :
+          <input type="text" name="nomor_plat" id="nomor_plat" autofocus required value="<?= $kendaraan['nomor_plat']; ?>">
+        </label>
       </li>
       <li>
-        <label for="merk_kendaraan">Merk Kendaraan :</label>
-        <input type="text" name="merk_kendaraan" id="merk_kendaraan" autofocus required value="<?= $kendaraan['merk_kendaraan']; ?>">
+        <label for="merk_kendaraan">Merk Kendaraan :
+          <input type="text" name="merk_kendaraan" id="merk_kendaraan" autofocus required value="<?= $kendaraan['merk_kendaraan']; ?>">
+        </label>
       </li>
       <li>
-        <label for="tipe_kendaraan">Tipe Kendaraan :</label>
-        <input type="text" name="tipe_kendaraan" id="tipe_kendaraan" autofocus required value="<?= $kendaraan['tipe_kendaraan']; ?>">
+        <label for="tipe_kendaraan">Tipe Kendaraan :
+          <input type="text" name="tipe_kendaraan" id="tipe_kendaraan" autofocus required value="<?= $kendaraan['tipe_kendaraan']; ?>">
+        </label>
       </li>
       <li>
-        <label for="unit_kerja">Unit Kerja :</label>
-        <input type="text" name="unit_kerja" id="unit_kerja" autofocus required value="<?= $kendaraan['unit_kerja']; ?>">
+        <label for="unit_kerja">Unit Kerja :
+          <input type="text" name="unit_kerja" id="unit_kerja" autofocus required value="<?= $kendaraan['unit_kerja']; ?>">
+        </label>
       </li>
       <li>
-        <label for="email">Email :</label>
-        <input type="text" name="email" id="email" autofocus required value="<?= $kendaraan['email']; ?>">
+        <label for="email">Email :
+          <input type="text" name="email" id="email" autofocus required value="<?= $kendaraan['email']; ?>">
+        </label>
       </li>
       <li>
-        <label for="gambar">Gambar :</label>
-        <input type="text" name="gambar" id="gambar" required value="<?= $kendaraan['gambar']; ?>">
+        <label for="gambar">Gambar :
+          <input type="hidden" name="gambar_lama" value="<?= $kendaraan['gambar']; ?>">
+          <input type="file" name="gambar" id="gambar" class="gambar" onchange="previewGambar()">
+        </label>
+        <img src="gambar/<?= $kendaraan['gambar']; ?>" width="120" style="display: block;" class="preview-gambar">
       </li>
       <li>
         <button type="submit" name="tombol-ubah">Ubah Data</button>
       </li>
     </ul>
   </form>
+
+  <script src="js/script.js"></script>
+
 </body>
 
 </html>

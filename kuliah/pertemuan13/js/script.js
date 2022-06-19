@@ -32,3 +32,17 @@ fetch('ajax/ajax_cari.php?kataKunci=' + kataKunci.value)
 .then((response) => response.text())
 .then((response) => (container.innerHTML = response));
 });
+
+// Preview Gambar untuk Tambah dan Ubah Data
+function previewGambar() 
+{
+  const gambar = document.querySelector('.gambar');
+  const previewGambar = document.querySelector('.preview-gambar');
+
+  const oFReader = new FileReader();
+  oFReader.readAsDataURL(gambar.files[0]);
+
+  oFReader.onload = function (oFREvent){
+    previewGambar.src = oFREvent.target.result;
+  };
+}

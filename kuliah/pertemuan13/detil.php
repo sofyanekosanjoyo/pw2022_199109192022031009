@@ -29,7 +29,7 @@ $kendaraan = query("SELECT * FROM kendaraan WHERE id = $id");
 <body>
   <h3>Detil Kendaraan</h3>
   <ul>
-    <li><img src="gambar/<?= $kendaraan['gambar']; ?>" alt=""></li>
+    <li><img src="gambar/<?= $kendaraan['gambar']; ?>" alt="" width="250"></li>
     <li>Nomor Plat : <?= $kendaraan['nomor_plat']; ?> </li>
     <li>Merk Kendaraan : <?= $kendaraan['merk_kendaraan']; ?> </li>
     <li>Tipe Kendaraan : <?= $kendaraan['tipe_kendaraan']; ?> </li>

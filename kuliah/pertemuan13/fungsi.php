@@ -28,6 +28,70 @@ function query($query)
   return $dataKendaraan;
 }
 
+function upload_gambar()
+{
+  $nama_file = $_FILES['gambar']['name'];
+  $tipe_file = $_FILES['gambar']['type'];
+  $ukuran_file = $_FILES['gambar']['size'];
+  $error_file = $_FILES['gambar']['error'];
+  $tmp_file = $_FILES['gambar']['tmp_name'];
+
+  // Ketika tidak ada gambar yang dipilih
+  if ($error_file == 4) {
+    // echo "<script>
+    //       alert('Gambar tidak boleh kosong!');
+    //       </script>
+    //     ";
+
+    return 'nophoto.jpg';
+  }
+
+  // Cek ektensi file
+  $format_gambar = ['jpg', 'jpeg', 'png'];
+  $ekstensi_file = explode('.', $nama_file);
+  $ekstensi_file = strtolower(end($ekstensi_file));
+
+  if (!in_array($ekstensi_file, $format_gambar)) {
+    echo "<script>
+          alert('Yang anda upload bukan file gambar!');
+          </script>
+        ";
+
+    return false;
+  }
+
+  // Cek tipe file
+  if ($tipe_file !== 'image/jpeg' && $tipe_file !== 'image/jpg' && $tipe_file !== 'image/png') {
+    echo "<script>
+          alert('Yang anda upload bukan file gambar!');
+          </script>
+        ";
+
+    return false;
+  }
+
+  // Cek ukuran file
+  // Maksimal 5MB = 5.000.000 byte
+  if ($ukuran_file > 5000000) {
+    echo "<script>
+          alert('Ukuran file terlalu besar!');
+          </script>
+          ";
+
+    return false;
+  }
+
+  // Lolos pengecekan
+  // Siap upload file
+  // Generate nama file gambar baru supaya unik
+  $nama_file_baru = uniqid();
+  $nama_file_baru .= '.';
+  $nama_file_baru .= $ekstensi_file;
+  move_uploaded_file($tmp_file, 'gambar/' . $nama_file_baru);
+
+  return $nama_file_baru;
+}
+
 function tambah_data($data)
 {
   $koneksidb = koneksi();
@@ -36,8 +100,16 @@ function tambah_data($data)
   $tipe_kendaraan = htmlspecialchars($data['tipe_kendaraan']);
   $nomor_plat = htmlspecialchars($data['nomor_plat']);
   $unit_kerja = htmlspecialchars($data['unit_kerja']);
-  $gambar = htmlspecialchars($data['gambar']);
+  //$gambar = htmlspecialchars($data['gambar']);
   $email = htmlspecialchars($data['email']);
+
+  // Upload gambar
+  $gambar = upload_gambar();
+
+  // Cek jika gambarnya kosong
+  if (!$gambar) {
+    return false;
+  }
 
   $query = "INSERT INTO 
             kendaraan
@@ -54,6 +126,12 @@ function tambah_data($data)
 function hapus_data($id)
 {
   $koneksidb = koneksi();
+
+  // Menghapus gambar di folder gambar
+  $kendaraan = query("SELECT * FROM kendaraan WHERE id = $id");
+  if ($kendaraan['gambar'] != 'nophoto.jpg') {
+    unlink('gambar/' . $kendaraan['gambar']);
+  }
 
 
   $query = "DELETE FROM 
@@ -75,8 +153,18 @@ function ubah_data($data)
   $tipe_kendaraan = htmlspecialchars($data['tipe_kendaraan']);
   $nomor_plat = htmlspecialchars($data['nomor_plat']);
   $unit_kerja = htmlspecialchars($data['unit_kerja']);
-  $gambar = htmlspecialchars($data['gambar']);
+  $gambar_lama = htmlspecialchars($data['gambar_lama']);
   $email = htmlspecialchars($data['email']);
+
+  $gambar = upload_gambar();
+  if (!$gambar) {
+    // return false;
+    $gambar = 'nophoto.jpg';
+  }
+
+  if ($gambar == 'nophoto.jpg') {
+    $gambar = $gambar_lama;
+  }
 
   $query = "UPDATE kendaraan SET
             merk_kendaraan = '$merk_kendaraan', 
